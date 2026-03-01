@@ -5,19 +5,6 @@ from blog.forms import CountryForm, CityForm, StreetForm, HomeForm
 
 class AddressWizard(SessionWizardView):
 
-    form_list0 = [
-        {"country": CountryForm},
-        {"city": CityForm}, 
-        {'street': StreetForm},
-        {'home': HomeForm},
-    ]
-
-    form_list2 = [
-        ("country", CountryForm),
-        ("city", CityForm), 
-        ('street', StreetForm),
-        ('home', HomeForm)
-    ]
 
     form_list = [
         CountryForm,
@@ -26,16 +13,17 @@ class AddressWizard(SessionWizardView):
         HomeForm,
     ]
 
-    TEMPLATES = {"country": "country_form.html",
-                "city": "city_form.html",
-                "street": "street_form.html",
-                "home": "home_form.html"}
+    TEMPLATES = {"0": "country_form.html",
+                "1": "city_form.html",
+                "2": "street_form.html",
+                "3": "home_form.html"}
 
     def get_template_names(self):
-        # возвращает шаблоны по умолчанию
-        return super().get_template_names()
-        # возвращаем свои шаблоны
-        #return [TEMPLATES[self.steps.current]]
+        # We return defaults templates
+        # return super().get_template_names()
+
+        # Or return our templates
+        return [self.TEMPLATES[self.steps.current]]
 
     '''
     Этот метод единственный, который следует создать в обязательном порядке
